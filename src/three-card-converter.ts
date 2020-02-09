@@ -1,5 +1,7 @@
 import { CARDVALS, DECK } from './constants';
 
+// The structure of this has remained largely unchanged from the original javascript
+// TODO refactor + split up to make more functional
 class ThreeCardConverter {
 
   fillHand(cards: string[]): string[] {
@@ -8,9 +10,9 @@ class ThreeCardConverter {
     let cardsUsed = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 
     // Convert each card to vals 0 - 12, strip suit
-    cards.forEach((card) => {
-      var i = Math.floor((DECK[card.toLowerCase()] - 1) / 4);
-      cardsUsed[i] = 1;
+    cards.forEach(card => {
+      const index = Math.floor((DECK[card.toLowerCase()] - 1) / 4);
+      cardsUsed[index] = 1;
     });
 
     let toFill = 2; // Need to fill 2 cards
@@ -43,7 +45,7 @@ class ThreeCardConverter {
     // Add ace to bottom as well
     let newCards = [cardsUsed[cardsUsed.length - 1]].concat(cardsUsed);
     // Add in new card (pushed up one by ace)
-    newCards[rank+1] = 2;
+    newCards[rank + 1] = 2;
     // Determine if there are 5 cards in a row
     return 5 === newCards.reduce((prev, next) => {
       if (prev === 5) {
